@@ -4,6 +4,7 @@
   "immed": false,
   "latedef": true,
   "newcap": true,
+  "node": true,
   "noarg": true,
   "sub": true,
   "undef": true,
