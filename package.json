@@ -1,53 +1,25 @@
 {
   "name": "kendo-backbone",
-  "description": "Kendo UI and BackboneJS integration. Part of the KendoUI-Labs.",
-  "version": "0.0.6",
+  "description": "Use Kendo DataSource as a Backbone Collection, and vice versa",
+  "version": "0.1.0",
   "homepage": "https://github.com/kendo-labs/kendo-backbone",
-  "private": false,
   "keywords": [
+    "kendo",
     "backbone",
+    "backbone.js",
     "plugin",
     "kendoui",
-    "kendo",
     "widget",
     "integration"
   ],
-  "licenses": [
-    {
-      "type": "Apache-2.0",
-      "url": "https://github.com/kendo-labs/kend-backbone/blob/master/LICENSE.md"
-    }
-  ],
-  "scripts": {
-    "start": "grunt server",
-    "demos": "node app.js"
-  },
-  "author": {
-    "name": "Derick Bailey",
-    "email": "derick@kendoui.com",
-    "web": "http://kendoui.com"
-  },
-  "bugs": {
-    "web": "https://github.com/kendo-labs/kendo-backbone/issues"
-  },
-  "github": "https://github.com/kendo-labs/kendo-backbone",
+  "license": "MIT",
+  "author": "Travis Webb <me@traviswebb.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kendo-labs/kendo-backbone.git"
+    "url": "https://github.com/tjwebb/kendo-backbone.git"
   },
-
-  "devDependencies": {
-    "express": "~3.1",
-    "jade": "*",
-    "grunt": "~0.4.0",
-    "grunt-contrib-jasmine": "~0.3.1",
-    "grunt-contrib-jshint": "~0.1.1",
-    "grunt-plato": "~0.1.4",
-    "grunt-preprocess": "git://github.com/onehealth/grunt-preprocess.git#grunt-0.4.0",
-    "grunt-contrib-uglify": "~0.1.1",
-    "grunt-contrib-concat": "~0.1.2",
-    "grunt-template-jasmine-istanbul": "~0.1.1",
-    "grunt-contrib-watch": "~0.2.0",
-    "grunt-contrib-connect": "~0.1.2"
+  "peerDependencies": {
+    "backbone": "^1.1",
+    "lodash": "^3.0"
   }
 }
