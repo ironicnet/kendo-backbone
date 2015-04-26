@@ -1,0 +1,19 @@
+language: node_js
+  - "0.10"
+  - "0.12"
+  - "iojs"
+
+sudo: false
+
+notifications:
+  email: false
+
+deploy:
+  provider: npm
+  email: me@traviswebb.com
+  api_key:
+    secure: pJS6FqXNXe0QpyRikmpbkkDUN1OtE2AtEUvOe0Hk1Hxi6d4cB4sJMXF+fP1SHAB9m9sf9HiXC6CemPk/OFZAWnPA8rX+HfcjE70zZJODf6tSX8tFMmmuYcC/eYpue7Hr2+rMxSL1I7NDX6aPV3S7UOQkuuOA+tGj5Ysr0GH4dDI=
+  on:
+    tags: true
+    repo: tjwebb/kendo-backbone
+    branches: all

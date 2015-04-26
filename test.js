@@ -6,7 +6,7 @@ describe('kendo-backbone', function () {
   var env;
 
   describe('pre-requisites', function () {
-    it('should check prerequisite existence of kendo.ui', function () {
+    it('should check prerequisite existence of kendo.data', function () {
       assert.throws(function () {
         require('./');
       }, Error);
