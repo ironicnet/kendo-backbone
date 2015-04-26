@@ -1,23 +1,16 @@
 {
-  "curly": true,
-  "eqeqeq": true,
-  "immed": false,
-  "latedef": true,
-  "newcap": true,
+  "indent": 2,
+  "maxdepth": 6,
+  "maxlen": 120,
+  "esnext": true,
+  "expr": true,
+  "trailing": true,
   "node": true,
-  "noarg": true,
-  "sub": true,
-  "undef": true,
-  "boss": true,
-  "eqnull": true,
-  "browser": true,
-  "proto": true,
+  "esnext": true,
   "globals": {
-    "jQuery": true,
-    "Backbone": true,
-    "$": true,
-    "_": true,
-    "kendo": true,
-    "console": true
+    "describe": true,
+    "it": true,
+    "before": true,
+    "after": true
   }
 }
