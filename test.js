@@ -7,17 +7,16 @@ var jsdom = require('jsdom');
 var SailsApp = require('sails').Sails;
 var BackboneClient;
 
+var authHeaders = {
+  headers: {
+    Authorization: 'Basic YWRtaW46YWRtaW4xMjM0'
+  }
+};
+
 var sailsConfig = {
   appPath: path.dirname(require.resolve('hashware-api')),
   hooks: {
     grunt: false
-  },
-  config: {
-    permissions: {
-      adminUsername: 'admin@sailsjs.org',
-      adminPassword: 'admin1234',
-      adminEmail: 'admin@sailsjs.org'
-    }
   },
   models: {
     connection: 'unittest-memory'
@@ -63,7 +62,9 @@ describe('kendo-backbone', function () {
           'http://cdn.kendostatic.com/2014.3.1411/js/kendo.all.min.js'
         ],
         done: function (err, window) {
+          window.$.ajax = require('najax');
           global.kendo = window.kendo;
+          kendo.jQuery.ajax = require('najax');
           global._window = window;
           done(err);
         }
@@ -79,15 +80,13 @@ describe('kendo-backbone', function () {
 
   });
 
-  describe('kendo.data.Backbone.DataSource', function () {
-    var kendoDataSource, backboneDataSource, testCollection;
+  describe('DataSource', function () {
+    var kendoDataSource, backboneDataSource, testCollection, vanillaCollection;
 
     before(function (done) {
       this.timeout(60 * 1000);
 
-      global.$ = {
-        ajax: require('najax')
-      };
+      global.$ = global._window.$;
       BackboneClient = require('sails-backbone-client');
 
       app.lift(sailsConfig, function (error, sails) {
@@ -110,19 +109,77 @@ describe('kendo-backbone', function () {
       assert(sdk.PermissionCollection);
       assert(sdk.ModelCollection);
 
-      testCollection = new sdk.PermissionCollection();
+      testCollection = new sdk.MinerDeviceCollection();
+      vanillaCollection = new sdk.MinerDeviceCollection();
     });
-    
+
     it('can define new vanilla kendo.data.DataSource without error', function () {
       kendoDataSource = new kendo.data.DataSource({
-        url: 'http://localhost:1444/permission'
+        transport: {
+          create: 'http://localhost:1444/api/v1/minerdevice',
+          read: 'http://localhost:1444/api/v1/minerdevice',
+          update: 'http://localhost:1444/api/v1/minerdevice',
+          destroy: 'http://localhost:1444/api/v1/minerdevice'
+        }
       });
     });
 
+    it('can request data using vanilla Backbone', function (done) {
+      vanillaCollection.fetch()
+        .then(function (results) {
+          assert(results.length > 1);
+          assert(vanillaCollection.length > 1);
+          done();
+        });
+    });
+
     it('can define new Backbone.DataSource without error', function () {
-      kendoDataSource = new kendo.data.Backbone.DataSource({
+      backboneDataSource = new kendo.data.Backbone.DataSource({
         collection: testCollection
       });
+    });
+
+    it('can fetch new data in vanilla kendo.data.DataSource', function (done) {
+      kendoDataSource = new kendo.data.DataSource({
+        transport: {
+          read: {
+            url: 'http://localhost:1444/api/v1/minerdevice',
+            dataType: 'json'
+          }
+        },
+        change: function () {
+          var items = kendoDataSource.data();
+          assert(items.length > 0);
+          done();
+        }
+      });
+      kendoDataSource.fetch();
+    });
+
+    it('can fetch new data in kendo.data.Backbone.DataSource using kendo fetch', function (done) {
+      testCollection = new sdk.MinerDeviceCollection();
+      backboneDataSource = new kendo.data.Backbone.DataSource({
+        collection: testCollection,
+      });
+      backboneDataSource.fetch().then(function () {
+        var items = backboneDataSource.data();
+        assert(items.length > 0);
+        assert(testCollection.length > 0);
+        done();
+      });
+    });
+    it('can fetch new data in kendo.data.Backbone.DataSource using Backbone fetch', function (done) {
+      testCollection = new sdk.MinerDeviceCollection();
+      backboneDataSource = new kendo.data.Backbone.DataSource({
+        collection: testCollection,
+        change: function () {
+          var items = backboneDataSource.data();
+          assert(items.length > 0);
+          assert(testCollection.length > 0);
+          if (items.length == testCollection.length) done();
+        }
+      });
+      testCollection.fetch();
     });
 
   });
