@@ -1,10 +1,11 @@
 {
   "name": "kendo-backbone",
-  "description": "Use Kendo DataSource as a Backbone Collection, and vice versa",
+  "description": "Bind a Backbone.Collection to a Kendo DataSource",
   "version": "0.1.1",
-  "homepage": "https://github.com/kendo-labs/kendo-backbone",
+  "homepage": "https://github.com/tjwebb/kendo-backbone",
   "keywords": [
     "kendo",
+    "kendo-ui",
     "backbone",
     "backbone.js",
     "plugin",
