@@ -80,7 +80,7 @@ describe('kendo-backbone', function () {
   });
 
   describe('kendo.data.Backbone.DataSource', function () {
-    var kendoDataSource, backboneDataSource;
+    var kendoDataSource, backboneDataSource, testCollection;
 
     before(function (done) {
       this.timeout(60 * 1000);
@@ -102,11 +102,15 @@ describe('kendo-backbone', function () {
       });
     });
 
-    it('sanity check sails-permissions models', function () {
+    it('sanity check sails-permissions models + collections', function () {
       assert(sdk.Permission);
       assert(sdk.Model);
       assert(sdk.Role);
       assert(sdk.User);
+      assert(sdk.PermissionCollection);
+      assert(sdk.ModelCollection);
+
+      testCollection = new sdk.PermissionCollection();
     });
     
     it('can define new vanilla kendo.data.DataSource without error', function () {
@@ -116,7 +120,9 @@ describe('kendo-backbone', function () {
     });
 
     it('can define new Backbone.DataSource without error', function () {
-
+      kendoDataSource = new kendo.data.Backbone.DataSource({
+        collection: testCollection
+      });
     });
 
   });
