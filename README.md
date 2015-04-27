@@ -4,8 +4,9 @@
 [![Build status][travis-image]][travis-url]
 [![Dependency Status][daviddm-image]][daviddm-url]
 
-Integrate Kendo and Backbone. Use Kendo DataSource as a Backbone Collection, and
-vice versa. Tested on KendoUI 2014.3.1411 and Backbone 1.1.x.
+Bind Backbone.Collection to kendo.data.DataSource. Tested on KendoUI 2014.3.1411 and
+Backbone 1.1.x using [sails.js](http://sailsjs.org). Lets you use an existing
+Backbone API with Kendo.
 
 ## Install
 ```sh
@@ -20,7 +21,15 @@ $ npm install kendo-backbone --save
 
 ## Usage
 
+```js
+kendo.data.Backbone = require('kendo-backbone');
+```
+
+See unit tests
+
 ## API
+
+TODO
 
 ## License
 MIT
