@@ -1,7 +1,7 @@
 {
   "name": "kendo-backbone",
   "description": "Bind a Backbone.Collection to a Kendo DataSource",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/tjwebb/kendo-backbone",
   "keywords": [
     "kendo",
