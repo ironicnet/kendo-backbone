@@ -52,7 +52,7 @@ describe('kendo-backbone', function () {
   });
 
   describe('sanity', function () {
-  
+
     before(function (done) {
       this.timeout(10000);
       env = jsdom.env({
